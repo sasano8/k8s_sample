@@ -1,8 +1,4 @@
-doc-build:
-	@poetry run mkdocs build
+include common/Makefile
 
-doc-serve: doc-build
-	@poetry run mkdocs serve -a localhost:8001
-
-get-vm:
-	@microk8s kubectl get vm
+hello:
+	@echo "hello"
