@@ -267,7 +267,55 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    リファレンス
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    環境構築
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     アーキテクチャ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    各コンポーネントの概要
+  </a>
+  
+    <nav class="md-nav" aria-label="各コンポーネントの概要">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pod" class="md-nav__link">
+    Pod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    Deployment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    チュートリアル
   </a>
   
 </li>
@@ -322,7 +370,55 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    リファレンス
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    環境構築
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     アーキテクチャ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    各コンポーネントの概要
+  </a>
+  
+    <nav class="md-nav" aria-label="各コンポーネントの概要">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pod" class="md-nav__link">
+    Pod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    Deployment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    チュートリアル
   </a>
   
 </li>
@@ -353,8 +449,38 @@
                 
                 
                 <h1 id="_1">はじめに</h1>
-<h2 id="_2">アーキテクチャ</h2>
+<h2 id="_2">リファレンス</h2>
+<ul>
+<li>https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands</li>
+</ul>
+<h2 id="_3">環境構築</h2>
+<p>次を参考に環境を構築する。</p>
+<ul>
+<li>https://github.com/sasano8/zenn/blob/main/articles/infra-001-wsl.md</li>
+</ul>
+<h2 id="_4">アーキテクチャ</h2>
 <p><img alt="kubernetes" src="img/kubernetes.drawio.svg" /></p>
+<h2 id="_5">各コンポーネントの概要</h2>
+<h3 id="pod">Pod</h3>
+<p>一つあるいは複数のコンテナを内包する、kubernetesにおけるコンテナの最小実行単位となるグループ。
+このグループは、kubernetes上で論理的なホストとして振る舞う。</p>
+<h3 id="deployment">Deployment</h3>
+<p>対等な関係がある複数のポッド。
+サービスを停止せずに、稼働中のポッド置き換えなどで活用される。</p>
+<h2 id="_6">チュートリアル</h2>
+<p>Podを実行する。</p>
+<div class="highlight"><pre><span></span><code>kubectl run hello-world --image=hello-world -it --restart=Always
+# restart: デフォルトはAlways
+</code></pre></div>
+
+<p><code>run</code>コマンドは多くの役割を担っており、機能の肥大化が理由でポッド起動時を除き非推奨となった。
+代替コマンドは、次の通りです。</p>
+<div class="highlight"><pre><span></span><code>kubectl create deployment --image hello-world hello-world
+</code></pre></div>
+
+<p>Podを削除する。</p>
+<div class="highlight"><pre><span></span><code>kubectl delete pod hello-world
+</code></pre></div>
                 
               
 
