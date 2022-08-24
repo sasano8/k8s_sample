@@ -333,19 +333,90 @@ PDFとして保存したい場合は、<code>印刷 -> PDFに保存</code>を実
 <h3 id="index-deployment">Deployment</h3>
 <p>対等な関係がある複数のポッド。
 サービスを停止せずに、稼働中のポッド置き換えなどで活用される。</p>
-<h2 id="index-_6">チュートリアル</h2>
-<p>Podを実行する。</p>
-<div class="highlight"><pre><span></span><code>kubectl run hello-world --image=hello-world -it --restart=Always
-# restart: デフォルトはAlways
+<p>NAME                               READY   STATUS             RESTARTS      AGE
+pod/hello-world-649b9bfb9c-4mhhl   0/1     CrashLoopBackOff   5 (71s ago)   4m34s</p>
+<p>NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   46h</p>
+<p>NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/hello-world   0/1     1            0           36h</p>
+<p>NAME                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/hello-world-649b9bfb9c   1         1         0       36h</p>
+<h2 id="index-_6">基本操作</h2>
+<p>k8sを起動する（minikubeの例）。</p>
+<p><code>kubernetes-version</code>は指定しないでよいが、不具合発生時などは安定バージョンを指定してみる。</p>
+<div class="highlight"><pre><span></span><code>minikube start --kubernetes-version=v1.23.8
 </code></pre></div>
 
-<p><code>run</code>コマンドは多くの役割を担っており、機能の肥大化が理由でポッド起動時を除き非推奨となった。
-代替コマンドは、次の通りです。</p>
+<p>キャッシュなどは次のフォルダで管理される。（TODO: プロジェクトごとにキャッシュフォルダを変えることはできる？）</p>
+<div class="highlight"><pre><span></span><code>ll ~/.kube
+</code></pre></div>
+
+<p>停止する時は次のコマンドを実行する。</p>
+<div class="highlight"><pre><span></span><code>minikube stop
+</code></pre></div>
+
+<p>バージョンを表示する。</p>
+<div class="highlight"><pre><span></span><code>kubectl version
+</code></pre></div>
+
+<p>クラスタ情報を表示する。</p>
+<div class="highlight"><pre><span></span><code>kubectl cluster-info
+</code></pre></div>
+
+<p>デプロイメントを実行する。</p>
 <div class="highlight"><pre><span></span><code>kubectl create deployment --image hello-world hello-world
+# 非推奨: kubectl run hello-world --image=hello-world -it --restart=Never
+# --restart: デフォルトはAlways
+# --rm でcomplted時にpodを自動的に削除することができる
+</code></pre></div>
+
+<p>dockerにおける大体のコマンドは次の通り。</p>
+<div class="highlight"><pre><span></span><code>docker run hello-world
 </code></pre></div>
 
 <p>Podを削除する。</p>
 <div class="highlight"><pre><span></span><code>kubectl delete pod hello-world
+</code></pre></div>
+
+<p>全てのデプロイメントの実行状態を取得。</p>
+<div class="highlight"><pre><span></span><code>kubectl get all -o wide
+</code></pre></div>
+
+<p>任意のリソースを取得。</p>
+<div class="highlight"><pre><span></span><code>k get pod,deployment -o wide
+</code></pre></div>
+
+<p>使用できるリソースと省略形を確認する。</p>
+<div class="highlight"><pre><span></span><code>kubectl api-resources
+</code></pre></div>
+
+<p>podをスケールする。</p>
+<div class="highlight"><pre><span></span><code>kubectl create deployment --image=nginx nginx
+kubectl scale --replicas=3 deployment/nginx
+</code></pre></div>
+
+<p><code>replicas=0</code>はpodを再起動する際などに使用できる。</p>
+<div class="highlight"><pre><span></span><code>kubectl scale --replicas=0 deployment/nginx
+kubectl scale --replicas=1 deployment/nginx
+</code></pre></div>
+
+<p>バッチ処理系のコンテナはジョブとして実行する。</p>
+<div class="highlight"><pre><span></span><code>kubectl create job hello-world --image=hello-world
+</code></pre></div>
+
+<p>対話型ポッドを起動する。</p>
+<div class="highlight"><pre><span></span><code>kubectl run busybox --image=busybox --restart=Never --rm -it sh
+</code></pre></div>
+
+<p>podにターミナル接続する。</p>
+<div class="highlight"><pre><span></span><code><span class="n">TODO</span><span class="o">:</span> <span class="n">xxx</span>
+</code></pre></div>
+
+<h2 id="index-_7">マニフェスト</h2>
+<div class="highlight"><pre><span></span><code>cat nginx-pod.yml 
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>kubectl apply -f nginx-pod.yml 
 </code></pre></div></section></div>
                 
               
