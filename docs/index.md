@@ -144,7 +144,7 @@ kubectl run busybox --image=busybox --restart=Never --rm -it sh
 podにターミナル接続する。
 
 ```
-TODO: xxx
+kubectl exec --stdin --tty <pod_name> -- /bin/bash
 ```
 
 ## マニフェスト
