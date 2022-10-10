@@ -150,7 +150,7 @@ kubectl run busybox --image=busybox --restart=Never --rm -it sh
 実行中コンテナへターミナル接続する。
 
 ```
-kubectl exec --stdin --tty nginx -- /bin/bash
+kubectl exec --stdin --tty <pod_name> -- /bin/bash
 ```
 
 
