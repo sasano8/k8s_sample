@@ -2,6 +2,12 @@
 
 ...
 
+
+# 目的
+
+- k8sの基礎を学ぶ
+- AWSにデプロイする
+
 # Getting Started
 
 ``` shell
@@ -84,6 +90,5 @@ kubectl get all -n kubevirt
 kubectl logs pod/kubevirt-install-manager -n kube-system
 
 https://minikube.sigs.k8s.io/docs/start/
-
 
 

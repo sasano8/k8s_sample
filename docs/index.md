@@ -97,10 +97,16 @@ Podを削除する。
 kubectl delete pod hello-world
 ```
 
-全てのデプロイメントの実行状態を取得。
+ある名前空間（省略するとdefault）の全てのリソースを表示する。
 
 ```
-kubectl get all -o wide
+kubectl get all -o wide --namespace=ingress
+```
+
+名前空間の一覧を表示する。
+
+```
+kubectl get namespace
 ```
 
 任意のリソースを取得。
@@ -141,19 +147,39 @@ kubectl create job hello-world --image=hello-world
 kubectl run busybox --image=busybox --restart=Never --rm -it sh
 ```
 
-podにターミナル接続する。
+実行中コンテナへターミナル接続する。
 
 ```
-TODO: xxx
+kubectl exec --stdin --tty nginx -- /bin/bash
 ```
+
 
 ## マニフェスト
 
-```
-cat nginx-pod.yml 
-```
+コマンドラインの代わりにマニフェストで各種リソースを定義することができる。
 
 
-```
-kubectl apply -f nginx-pod.yml 
-```
+## ヘルスチェック
+
+マニフェストにプロープを設定することでヘルスチェックを行い、状態に対して行う動作を制御できる。
+デフォルトのプロープは設定されておらず、制御が無効になっている？？
+
+### 活性プロープ（Liveness Probe）
+
+コンテナが実行中であることを探査。失敗した場合は、コンテナを強制終了し再スタートさせる。
+
+### 準備状態プロープ（Readiness Probe）
+
+コンテナのアプリケーションがリクエストを受け取れるか探査する。失敗した場合は、サービスからのリクエストトラフィックを遮断する。
+
+
+## 気になること
+
+- kubernetesではdockerは非推奨！？
+    - コンテナ・イメージを操作する時にdocker apiは非推奨で、CRI（Container Runtime Interface）を使え（一般層は意識しないでよい）という話
+    - コンテナやイメージフォーマット（dockerなど）があり、それをCRIを介して操作する標準化の仕組みが整ってきている
+
+## 非互換
+
+- v1.25
+    - PodSecurityPolicy (PSP) アドミッション コントローラーの削除。後継は、Pod Security Admission

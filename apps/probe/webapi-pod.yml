@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapi
+spec:
+  containers:
+  - name: webapi
+    image: sasano8/webapl:0.1  # ハンドラーが実装されたアプリ
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 3000
+      initialDelaySeconds: 3  # 初回起動から探査開始までの猶予
+      periodSeconds: 5  # チェック間隔
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 3000
+      initialDelaySeconds: 15
+      periodSeconds: 6
+      # limits:
+      #   memory: "128Mi"
+      #   cpu: "500m"
