@@ -14,7 +14,7 @@
     
     
       
-        <title>印刷用ページ - k8s</title>
+        <title>Examples - k8s</title>
       
     
     
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              印刷用ページ
+              Examples
             
           </span>
         </div>
@@ -243,15 +243,9 @@
   
   
     <li class="md-nav__item">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+      <a href="../print_page/" class="md-nav__link">
         印刷用ページ
       </a>
-      
     </li>
   
 
@@ -268,178 +262,28 @@
             <article class="md-content__inner md-typeset">
               
 
+    <a href="../print_page/" title="印刷用ページ" class="md-content__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 3H6v4h12m1 5a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1m-3 7H8v-5h8m3-6H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3z"/></svg>
+    </a>
+
 
 
 
                 
+                  <a href="https://github.com/sasano8/k8s_sample/edit/main/docs/examples.md" title="編集" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
                 
-                <div id="print-site-page" class="print-site-enumerate-headings print-site-enumerate-figures">
-        <section id="print-site-cover-page">
-            
-<div style="padding-bottom: 3em">
-
-    
-        <h1>k8s</h1>
-    
-
-    
-
-</div>
-
-
-
-<p>
-    
-    
-        <small>Repo: <a href="https://github.com/sasano8/k8s_sample/">https://github.com/sasano8/k8s_sample/</a></small><br />
-    
-    
-</p>
-        </section>
-        
-        <div id="print-site-banner">
-            <p>
-    <em>印刷用ページ</em>
-</p>
-<p>
-全てのページを１つにまとめた印刷用のページです。<br>
-PDFとして保存したい場合は、<code>印刷 -> PDFに保存</code>を実行してください。
-</p>
-        </div>
-        
-        <section class="print-page">
-            <div id="print-page-toc" data-toc-depth="6">
-                <nav role='navigation' class='print-page-toc-nav'>
-                <h1 class='print-page-toc-title'>目次</h1>
-                </nav>
-            </div>
-        </section>
-        <section class="print-page" id="index"><h1 id="index-_1">はじめに</h1>
-<h2 id="index-_2">リファレンス</h2>
-<ul>
-<li>https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands</li>
-</ul>
-<h2 id="index-_3">環境構築</h2>
-<p>次を参考に環境を構築する。</p>
-<ul>
-<li>https://github.com/sasano8/zenn/blob/main/articles/infra-001-wsl.md</li>
-</ul>
-<h2 id="index-_4">アーキテクチャ</h2>
-<p><img alt="kubernetes" src="../img/kubernetes.drawio.svg" /></p>
-<h2 id="index-_5">各コンポーネントの概要</h2>
-<h3 id="index-pod">Pod</h3>
-<p>一つあるいは複数のコンテナを内包する、kubernetesにおけるコンテナの最小実行単位となるグループ。
-このグループは、kubernetes上で論理的なホストとして振る舞う。</p>
-<h3 id="index-deployment">Deployment</h3>
-<p>対等な関係がある複数のポッド。
-サービスを停止せずに、稼働中のポッド置き換えなどで活用される。</p>
-<p>NAME                               READY   STATUS             RESTARTS      AGE
-pod/hello-world-649b9bfb9c-4mhhl   0/1     CrashLoopBackOff   5 (71s ago)   4m34s</p>
-<p>NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   46h</p>
-<p>NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/hello-world   0/1     1            0           36h</p>
-<p>NAME                                     DESIRED   CURRENT   READY   AGE
-replicaset.apps/hello-world-649b9bfb9c   1         1         0       36h</p>
-<h2 id="index-_6">基本操作</h2>
-<p>k8sを起動する（minikubeの例）。</p>
-<p><code>kubernetes-version</code>は指定しないでよいが、不具合発生時などは安定バージョンを指定してみる。</p>
-<div class="highlight"><pre><span></span><code>minikube start --kubernetes-version=v1.23.8
-</code></pre></div>
-
-<p>キャッシュなどは次のフォルダで管理される。（TODO: プロジェクトごとにキャッシュフォルダを変えることはできる？）</p>
-<div class="highlight"><pre><span></span><code>ll ~/.kube
-</code></pre></div>
-
-<p>停止する時は次のコマンドを実行する。</p>
-<div class="highlight"><pre><span></span><code>minikube stop
-</code></pre></div>
-
-<p>バージョンを表示する。</p>
-<div class="highlight"><pre><span></span><code>kubectl version
-</code></pre></div>
-
-<p>クラスタ情報を表示する。</p>
-<div class="highlight"><pre><span></span><code>kubectl cluster-info
-</code></pre></div>
-
-<p>デプロイメントを実行する。</p>
-<div class="highlight"><pre><span></span><code>kubectl create deployment --image hello-world hello-world
-# 非推奨: kubectl run hello-world --image=hello-world -it --restart=Never
-# --restart: デフォルトはAlways
-# --rm でcomplted時にpodを自動的に削除することができる
-</code></pre></div>
-
-<p>dockerにおける大体のコマンドは次の通り。</p>
-<div class="highlight"><pre><span></span><code>docker run hello-world
-</code></pre></div>
-
-<p>Podを削除する。</p>
-<div class="highlight"><pre><span></span><code>kubectl delete pod hello-world
-</code></pre></div>
-
-<p>ある名前空間（省略するとdefault）の全てのリソースを表示する。</p>
-<div class="highlight"><pre><span></span><code>kubectl get all -o wide --namespace=ingress
-</code></pre></div>
-
-<p>名前空間の一覧を表示する。</p>
-<div class="highlight"><pre><span></span><code>kubectl get namespace
-</code></pre></div>
-
-<p>任意のリソースを取得。</p>
-<div class="highlight"><pre><span></span><code>k get pod,deployment -o wide
-</code></pre></div>
-
-<p>使用できるリソースと省略形を確認する。</p>
-<div class="highlight"><pre><span></span><code>kubectl api-resources
-</code></pre></div>
-
-<p>podをスケールする。</p>
-<div class="highlight"><pre><span></span><code>kubectl create deployment --image=nginx nginx
-kubectl scale --replicas=3 deployment/nginx
-</code></pre></div>
-
-<p><code>replicas=0</code>はpodを再起動する際などに使用できる。</p>
-<div class="highlight"><pre><span></span><code>kubectl scale --replicas=0 deployment/nginx
-kubectl scale --replicas=1 deployment/nginx
-</code></pre></div>
-
-<p>バッチ処理系のコンテナはジョブとして実行する。</p>
-<div class="highlight"><pre><span></span><code>kubectl create job hello-world --image=hello-world
-</code></pre></div>
-
-<p>対話型ポッドを起動する。</p>
-<div class="highlight"><pre><span></span><code>kubectl run busybox --image=busybox --restart=Never --rm -it sh
-</code></pre></div>
-
-<p>実行中コンテナへターミナル接続する。</p>
-<div class="highlight"><pre><span></span><code><span class="nv">kubectl</span> <span class="k">exec</span> <span class="o">--</span><span class="nv">stdin</span> <span class="o">--</span><span class="nv">tty</span> <span class="o">&lt;</span><span class="nv">pod_name</span><span class="o">&gt;</span> <span class="o">--</span> <span class="o">/</span><span class="nv">bin</span><span class="o">/</span><span class="nv">bash</span>
-</code></pre></div>
-
-<h2 id="index-_7">マニフェスト</h2>
-<p>コマンドラインの代わりにマニフェストで各種リソースを定義することができる。</p>
-<h2 id="index-_8">ヘルスチェック</h2>
-<p>マニフェストにプロープを設定することでヘルスチェックを行い、状態に対して行う動作を制御できる。
-デフォルトのプロープは設定されておらず、制御が無効になっている？？</p>
-<h3 id="index-liveness-probe">活性プロープ（Liveness Probe）</h3>
-<p>コンテナが実行中であることを探査。失敗した場合は、コンテナを強制終了し再スタートさせる。</p>
-<h3 id="index-readiness-probe">準備状態プロープ（Readiness Probe）</h3>
-<p>コンテナのアプリケーションがリクエストを受け取れるか探査する。失敗した場合は、サービスからのリクエストトラフィックを遮断する。</p>
-<h2 id="index-_9">気になること</h2>
-<ul>
-<li>kubernetesではdockerは非推奨！？<ul>
-<li>コンテナ・イメージを操作する時にdocker apiは非推奨で、CRI（Container Runtime Interface）を使え（一般層は意識しないでよい）という話</li>
-<li>コンテナやイメージフォーマット（dockerなど）があり、それをCRIを介して操作する標準化の仕組みが整ってきている</li>
+                
+                  <h1>Examples</h1>
+                
+                <ul>
+<li>apps<ul>
+<li>basic: manifestの最もシンプルな使用方法を学ぶ</li>
+<li>probe: コンテナの起動確認・疎通確認について学ぶ</li>
 </ul>
 </li>
 </ul>
-<h2 id="index-_10">非互換</h2>
-<ul>
-<li>v1.25<ul>
-<li>PodSecurityPolicy (PSP) アドミッション コントローラーの削除。後継は、Pod Security Admission</li>
-</ul>
-</li>
-</ul></section></div>
                 
               
 
@@ -486,11 +330,5 @@ kubectl scale --replicas=1 deployment/nginx
         <script src="../js/print-site.js"></script>
       
     
-  
-        <script type="text/javascript">
-        window.addEventListener('load', function () {
-            generate_toc();
-        })
-        </script>
-        </body>
+  </body>
 </html>

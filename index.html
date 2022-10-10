@@ -327,6 +327,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    ヘルスチェック
+  </a>
+  
+    <nav class="md-nav" aria-label="ヘルスチェック">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#liveness-probe" class="md-nav__link">
+    活性プロープ（Liveness Probe）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readiness-probe" class="md-nav__link">
+    準備状態プロープ（Readiness Probe）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    気になること
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    非互換
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -437,6 +478,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    ヘルスチェック
+  </a>
+  
+    <nav class="md-nav" aria-label="ヘルスチェック">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#liveness-probe" class="md-nav__link">
+    活性プロープ（Liveness Probe）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readiness-probe" class="md-nav__link">
+    準備状態プロープ（Readiness Probe）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    気になること
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    非互換
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -526,8 +608,12 @@ replicaset.apps/hello-world-649b9bfb9c   1         1         0       36h</p>
 <div class="highlight"><pre><span></span><code>kubectl delete pod hello-world
 </code></pre></div>
 
-<p>全てのデプロイメントの実行状態を取得。</p>
-<div class="highlight"><pre><span></span><code>kubectl get all -o wide
+<p>ある名前空間（省略するとdefault）の全てのリソースを表示する。</p>
+<div class="highlight"><pre><span></span><code>kubectl get all -o wide --namespace=ingress
+</code></pre></div>
+
+<p>名前空間の一覧を表示する。</p>
+<div class="highlight"><pre><span></span><code>kubectl get namespace
 </code></pre></div>
 
 <p>任意のリソースを取得。</p>
@@ -556,16 +642,34 @@ kubectl scale --replicas=1 deployment/nginx
 <div class="highlight"><pre><span></span><code>kubectl run busybox --image=busybox --restart=Never --rm -it sh
 </code></pre></div>
 
-<p>podにターミナル接続する。</p>
+<p>実行中コンテナへターミナル接続する。</p>
 <div class="highlight"><pre><span></span><code><span class="nv">kubectl</span> <span class="k">exec</span> <span class="o">--</span><span class="nv">stdin</span> <span class="o">--</span><span class="nv">tty</span> <span class="o">&lt;</span><span class="nv">pod_name</span><span class="o">&gt;</span> <span class="o">--</span> <span class="o">/</span><span class="nv">bin</span><span class="o">/</span><span class="nv">bash</span>
 </code></pre></div>
 
 <h2 id="_7">マニフェスト</h2>
-<div class="highlight"><pre><span></span><code>cat nginx-pod.yml 
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code>kubectl apply -f nginx-pod.yml 
-</code></pre></div>
+<p>コマンドラインの代わりにマニフェストで各種リソースを定義することができる。</p>
+<h2 id="_8">ヘルスチェック</h2>
+<p>マニフェストにプロープを設定することでヘルスチェックを行い、状態に対して行う動作を制御できる。
+デフォルトのプロープは設定されておらず、制御が無効になっている？？</p>
+<h3 id="liveness-probe">活性プロープ（Liveness Probe）</h3>
+<p>コンテナが実行中であることを探査。失敗した場合は、コンテナを強制終了し再スタートさせる。</p>
+<h3 id="readiness-probe">準備状態プロープ（Readiness Probe）</h3>
+<p>コンテナのアプリケーションがリクエストを受け取れるか探査する。失敗した場合は、サービスからのリクエストトラフィックを遮断する。</p>
+<h2 id="_9">気になること</h2>
+<ul>
+<li>kubernetesではdockerは非推奨！？<ul>
+<li>コンテナ・イメージを操作する時にdocker apiは非推奨で、CRI（Container Runtime Interface）を使え（一般層は意識しないでよい）という話</li>
+<li>コンテナやイメージフォーマット（dockerなど）があり、それをCRIを介して操作する標準化の仕組みが整ってきている</li>
+</ul>
+</li>
+</ul>
+<h2 id="_10">非互換</h2>
+<ul>
+<li>v1.25<ul>
+<li>PodSecurityPolicy (PSP) アドミッション コントローラーの削除。後継は、Pod Security Admission</li>
+</ul>
+</li>
+</ul>
                 
               
 
