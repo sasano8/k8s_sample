@@ -416,6 +416,14 @@ kubectl scale --replicas=1 deployment/nginx
 <div class="highlight"><pre><span></span><code><span class="nv">kubectl</span> <span class="k">exec</span> <span class="o">--</span><span class="nv">stdin</span> <span class="o">--</span><span class="nv">tty</span> <span class="o">&lt;</span><span class="nv">pod_name</span><span class="o">&gt;</span> <span class="o">--</span> <span class="o">/</span><span class="nv">bin</span><span class="o">/</span><span class="nv">bash</span>
 </code></pre></div>
 
+<p>podの詳細情報（クラッシュの原因など）を取得する。</p>
+<div class="highlight"><pre><span></span><code>kubectl describe pod/&lt;pod_name&gt;
+</code></pre></div>
+
+<p>起動後コンテナのログを確認する。</p>
+<div class="highlight"><pre><span></span><code>kubectl logs pod/&lt;pod_name&gt;
+</code></pre></div>
+
 <h2 id="index-_7">マニフェスト</h2>
 <p>コマンドラインの代わりにマニフェストで各種リソースを定義することができる。</p>
 <h2 id="index-_8">ヘルスチェック</h2>
