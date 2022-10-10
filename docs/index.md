@@ -153,6 +153,19 @@ kubectl run busybox --image=busybox --restart=Never --rm -it sh
 kubectl exec --stdin --tty <pod_name> -- /bin/bash
 ```
 
+podの詳細情報（クラッシュの原因など）を取得する。
+
+```
+kubectl describe pod/<pod_name>
+```
+
+起動後コンテナのログを確認する。
+
+```
+kubectl logs pod/<pod_name>
+```
+
+
 
 ## マニフェスト
 
