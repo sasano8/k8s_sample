@@ -433,7 +433,9 @@ kubectl scale --replicas=1 deployment/nginx
 <p>コンテナが実行中であることを探査。失敗した場合は、コンテナを強制終了し再スタートさせる。</p>
 <h3 id="index-readiness-probe">準備状態プロープ（Readiness Probe）</h3>
 <p>コンテナのアプリケーションがリクエストを受け取れるか探査する。失敗した場合は、サービスからのリクエストトラフィックを遮断する。</p>
-<h2 id="index-_9">気になること</h2>
+<h2 id="index-_9">サイドカーパターン</h2>
+<p>一つのpodに複数のコンテナを内包する構成。</p>
+<h2 id="index-_10">気になること</h2>
 <ul>
 <li>kubernetesではdockerは非推奨！？<ul>
 <li>コンテナ・イメージを操作する時にdocker apiは非推奨で、CRI（Container Runtime Interface）を使え（一般層は意識しないでよい）という話</li>
@@ -441,7 +443,7 @@ kubectl scale --replicas=1 deployment/nginx
 </ul>
 </li>
 </ul>
-<h2 id="index-_10">非互換</h2>
+<h2 id="index-_11">非互換</h2>
 <ul>
 <li>v1.25<ul>
 <li>PodSecurityPolicy (PSP) アドミッション コントローラーの削除。後継は、Pod Security Admission</li>
